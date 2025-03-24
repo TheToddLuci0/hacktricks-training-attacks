@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: configure aws creds
-        uses: aws-actions/configure-aws-credentials
+        uses: aws-actions/configure-aws-credentials@v4.1.0
         with:
           role-to-assume: arn:aws:iam::331172489455:role/sts-lab-2-target
           role-session-name: gha-federated
